@@ -1,7 +1,5 @@
 import SnowflakeApp from '../components/SnowflakeApp'
-import dynamic from "next/dynamic";
-
-const constants = dynamic(import("../constants_engineering"))
+import * as constants from '../constants_product';
 
 function Home() {
   return (

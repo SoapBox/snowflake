@@ -1,14 +1,14 @@
 // @flow
 import * as d3 from 'd3'
 
-export type TrackId = 'MOBILE' | 'WEB_CLIENT' | 'FOUNDATIONS' | 'SERVERS' |
+export type TrackId = 'MARKET' | 'WEB_CLIENT' | 'FOUNDATIONS' | 'SERVERS' |
   'PROJECT_MANAGEMENT' | 'COMMUNICATION' | 'CRAFT' | 'INITIATIVE' |
   'CAREER_DEVELOPMENT' | 'ORG_DESIGN' | 'WELLBEING' | 'ACCOMPLISHMENT' |
   'MENTORSHIP' | 'EVANGELISM' | 'RECRUITING' | 'COMMUNITY'
 export type Milestone = 0 | 1 | 2 | 3 | 4 | 5
 
 export type MilestoneMap = {
-  'MOBILE': Milestone, //market understanding
+  'MARKET': Milestone, //market understanding
   'WEB_CLIENT': Milestone, //Product strategy
   'FOUNDATIONS': Milestone, //product Analysis
   'SERVERS': Milestone, //Product Design
@@ -71,7 +71,7 @@ export type Track = {
 }
 
 type Tracks = {|
-  'MOBILE': Track,
+  'MARKET': Track,
   'WEB_CLIENT': Track,
   'FOUNDATIONS': Track,
   'SERVERS': Track,
@@ -90,7 +90,7 @@ type Tracks = {|
 |}
 
 export const tracks: Tracks = {
-  "MOBILE": {
+  "MARKET": {
     "displayName": "Market understanding",
     "category": "A",
     "description": "Assess and value market opportunities, monitor competitors, identify trends",

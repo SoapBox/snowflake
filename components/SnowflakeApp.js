@@ -9,8 +9,6 @@ import Wordmark from '../components/Wordmark'
 import LevelThermometer from '../components/LevelThermometer'
 import PointSummaries from '../components/PointSummaries'
 import TitleSelector from '../components/TitleSelector'
-import { eligibleTitles, trackIds, milestones, milestoneToPoints } from '../constants'
-import type { Milestone, MilestoneMap, TrackId } from '../constants'
 
 type SnowflakeAppState = {
   milestoneByTrack: MilestoneMap,
@@ -19,7 +17,7 @@ type SnowflakeAppState = {
   focusedTrackId: TrackId,
 }
 
-const hashToState = (hash: String): ?SnowflakeAppState => {
+const hashToState = (hash: String, trackIds): ?SnowflakeAppState => {
   if (!hash) return null
   const result = defaultState()
   const hashValues = hash.split('#')[1].split(',')
@@ -45,29 +43,16 @@ const coerceMilestone = (value: number): Milestone => {
   }
 }
 
-const emptyState = (): SnowflakeAppState => {
+const emptyState = (trackIds): SnowflakeAppState => {
   return {
     name: '',
     title: '',
-    milestoneByTrack: {
-      'MOBILE': 0,
-      'WEB_CLIENT': 0,
-      'FOUNDATIONS': 0,
-      'SERVERS': 0,
-      'PROJECT_MANAGEMENT': 0,
-      'COMMUNICATION': 0,
-      'CRAFT': 0,
-      'INITIATIVE': 0,
-      'CAREER_DEVELOPMENT': 0,
-      'ORG_DESIGN': 0,
-      'WELLBEING': 0,
-      'ACCOMPLISHMENT': 0,
-      'MENTORSHIP': 0,
-      'EVANGELISM': 0,
-      'RECRUITING': 0,
-      'COMMUNITY': 0
-    },
-    focusedTrackId: 'MOBILE'
+    milestoneByTrack: trackIds.reduce((acc, trackId) => {
+      acc[trackId] = 0
+
+      return acc
+    }, {}),
+    focusedTrackId: trackIds[0]
   }
 }
 
@@ -76,7 +61,7 @@ const defaultState = (): SnowflakeAppState => {
     name: 'Soapbox Simon',
     title: 'Senior Engineer',
     milestoneByTrack: {
-      'MOBILE': 1,
+      'MARKET': 1,
       'WEB_CLIENT': 2,
       'FOUNDATIONS': 3,
       'SERVERS': 1,
@@ -93,11 +78,11 @@ const defaultState = (): SnowflakeAppState => {
       'RECRUITING': 3,
       'COMMUNITY': 0
     },
-    focusedTrackId: 'MOBILE'
+    focusedTrackId: 'MARKET'
   }
 }
 
-const stateToHash = (state: SnowflakeAppState) => {
+const stateToHash = (state: SnowflakeAppState, trackIds) => {
   if (!state || !state.milestoneByTrack) return null
   const values = trackIds.map(trackId => state.milestoneByTrack[trackId]).concat(encodeURI(state.name), encodeURI(state.title))
   return values.join(',')
@@ -108,16 +93,18 @@ type Props = {}
 class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
   constructor(props: Props) {
     super(props)
-    this.state = emptyState()
+    this.state = {...props.constants};
+    this.state.user = emptyState(this.state.trackIds);
+    console.log(this.state);
   }
 
   componentDidUpdate() {
-    const hash = stateToHash(this.state)
+    const hash = stateToHash(this.state.user, this.state.trackIds)
     if (hash) window.location.replace(`#${hash}`)
   }
 
   componentDidMount() {
-    const state = hashToState(window.location.hash)
+    const state = hashToState(window.location.hash, this.state.trackIds)
     if (state) {
       this.setState(state)
     } else {
@@ -168,27 +155,27 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
               <input
                   type="text"
                   className="name-input"
-                  value={this.state.name}
+                  value={this.state.user.name}
                   onChange={e => this.setState({name: e.target.value})}
                   placeholder="Name"
                   />
               <TitleSelector
-                  milestoneByTrack={this.state.milestoneByTrack}
-                  currentTitle={this.state.title}
+                  milestoneByTrack={this.state.user.milestoneByTrack}
+                  currentTitle={this.state.user.title}
                   setTitleFn={(title) => this.setTitle(title)} />
             </form>
-            <PointSummaries milestoneByTrack={this.state.milestoneByTrack} />
-            <LevelThermometer milestoneByTrack={this.state.milestoneByTrack} />
+            <PointSummaries milestoneByTrack={this.state.user.milestoneByTrack} />
+            <LevelThermometer milestoneByTrack={this.state.user.milestoneByTrack} />
           </div>
           <div style={{flex: 0}}>
             <NightingaleChart
-                milestoneByTrack={this.state.milestoneByTrack}
-                focusedTrackId={this.state.focusedTrackId}
+                milestoneByTrack={this.state.user.milestoneByTrack}
+                focusedTrackId={this.state.user.focusedTrackId}
                 handleTrackMilestoneChangeFn={(track, milestone) => this.handleTrackMilestoneChange(track, milestone)} />
           </div>
         </div>
         <TrackSelector
-            milestoneByTrack={this.state.milestoneByTrack}
+            milestoneByTrack={this.state.user.milestoneByTrack}
             focusedTrackId={this.state.focusedTrackId}
             setFocusedTrackIdFn={this.setFocusedTrackId.bind(this)} />
         <KeyboardListener
@@ -197,8 +184,11 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
             increaseFocusedMilestoneFn={this.shiftFocusedTrackMilestoneByDelta.bind(this, 1)}
             decreaseFocusedMilestoneFn={this.shiftFocusedTrackMilestoneByDelta.bind(this, -1)} />
         <Track
-            milestoneByTrack={this.state.milestoneByTrack}
-            trackId={this.state.focusedTrackId}
+            tracks={this.state.tracks}
+            milestones={this.state.milestones}
+            milestoneByTrack={this.state.user.milestoneByTrack}
+            trackIds={this.state.trackIds}
+            trackId={this.state.user.focusedTrackId}
             handleTrackMilestoneChangeFn={(track, milestone) => this.handleTrackMilestoneChange(track, milestone)} />
         <div style={{display: 'flex', paddingBottom: '20px'}}>
           <div style={{flex: 5}}>
@@ -215,10 +205,10 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
   }
 
   handleTrackMilestoneChange(trackId: TrackId, milestone: Milestone) {
-    const milestoneByTrack = this.state.milestoneByTrack
+    const milestoneByTrack = this.state.user.milestoneByTrack
     milestoneByTrack[trackId] = milestone
 
-    const titles = eligibleTitles(milestoneByTrack)
+    const titles = this.state.eligibleTitles(milestoneByTrack)
     const title = titles.indexOf(this.state.title) === -1 ? titles[0] : this.state.title
 
     this.setState({ milestoneByTrack, focusedTrackId: trackId, title })
@@ -238,7 +228,7 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
   }
 
   shiftFocusedTrackMilestoneByDelta(delta: number) {
-    let prevMilestone = this.state.milestoneByTrack[this.state.focusedTrackId]
+    let prevMilestone = this.state.user.milestoneByTrack[this.state.focusedTrackId]
     let milestone = prevMilestone + delta
     if (milestone < 0) milestone = 0
     if (milestone > 5) milestone = 5
@@ -246,7 +236,7 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
   }
 
   setTitle(title: string) {
-    let titles = eligibleTitles(this.state.milestoneByTrack)
+    let titles = eligibleTitles(this.state.user.milestoneByTrack)
     title = titles.indexOf(title) == -1 ? titles[0] : title
     this.setState({ title })
   }
