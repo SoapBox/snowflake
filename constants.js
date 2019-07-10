@@ -1,5 +1,6 @@
 // @flow
 import * as d3 from 'd3'
+
 export const milestones = [0, 1, 2, 3, 4, 5]
 
 export const milestoneToPoints = (milestone: Milestone): number => {
