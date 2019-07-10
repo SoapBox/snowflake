@@ -157,7 +157,7 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
                   type="text"
                   className="name-input"
                   value={this.state.user.name}
-                  onChange={e => this.setState({name: e.target.value})}
+                  onChange={e => this.setState({ user: { ...this.state.user, name: e.target.value} })}
                   placeholder="Name"
                   />
               <TitleSelector
@@ -217,8 +217,7 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
     const titles = eligibleTitles(milestoneByTrack, this.state.titles, this.state.trackIds)
     const title = titles.indexOf(this.state.title) === -1 ? titles[0] : this.state.title
 
-    this.setState({ user: { milestoneByTrack, focusedTrackId: trackId, title } })
-    console.log(this.state);
+    this.setState({ user: { ...this.state.user, milestoneByTrack, focusedTrackId: trackId, title } })
   }
 
   shiftFocusedTrack(delta: number) {
@@ -230,9 +229,9 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
   }
 
   setFocusedTrackId(trackId: TrackId) {
-    let index = trackIds.indexOf(trackId)
-    const focusedTrackId = trackIds[index]
-    this.setState({ focusedTrackId })
+    let index = this.state.trackIds.indexOf(trackId)
+    const focusedTrackId = this.state.trackIds[index]
+    this.setState({ user: { ...this.state.user, focusedTrackId } })
   }
 
   shiftFocusedTrackMilestoneByDelta(delta: number) {
@@ -246,7 +245,7 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
   setTitle(title: string) {
     let titles = eligibleTitles(this.state.user.milestoneByTrack, this.state.trackIds)
     title = titles.indexOf(title) == -1 ? titles[0] : title
-    this.setState({ title })
+    this.setState({ user: { ...this.state.user, title } })
   }
 }
 
