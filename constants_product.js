@@ -1,6 +1,4 @@
 // @flow
-import * as d3 from 'd3'
-
 export type TrackId = 'MARKET' | 'WEB_CLIENT' | 'FOUNDATIONS' | 'SERVERS' |
   'PROJECT_MANAGEMENT' | 'COMMUNICATION' | 'CRAFT' | 'INITIATIVE' |
   'CAREER_DEVELOPMENT' | 'ORG_DESIGN' | 'WELLBEING' | 'ACCOMPLISHMENT' |
@@ -24,7 +22,6 @@ export type MilestoneMap = {
   'RECRUITING': Milestone,
   'COMMUNITY': Milestone
 }
-
 type Tracks = {|
   'MARKET': Track,
   'WEB_CLIENT': Track,
@@ -1105,3 +1102,16 @@ export const tracks: Tracks = {
     }],
   },
 }
+
+export const titles = [
+  {label: 'Jr Product Manager', minPoints: 0, maxPoints: 16},
+  {label: 'Engineer II', minPoints: 17, maxPoints: 35},
+  {label: 'Sr. Engineer', minPoints: 36, maxPoints: 57},
+  {label: 'Team Lead', minPoints: 36, maxPoints: 57},
+  {label: 'Engineering Manager', minPoints: 36, maxPoints: 57},
+  {label: 'Staff Engineer', minPoints: 58, maxPoints: 89},
+  {label: 'Sr. Team Lead', minPoints: 58, maxPoints: 89},
+  {label: 'Sr. Engineering Manager', minPoints: 58, maxPoints: 89},
+  {label: 'Principal Engineer', minPoints: 90},
+  {label: 'Dir. Engineering', minPoints: 90}
+]
