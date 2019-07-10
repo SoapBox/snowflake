@@ -46,14 +46,14 @@ export type Track = {
   }[]
 }
 
-export const trackIds: TrackId[] = Object.keys(tracks)
+export const getTrackIds: TrackId[] = tracks => Object.keys(tracks)
 
-export const categoryIds: Set<string> = trackIds.reduce((set, trackId) => {
+export const categoryIds: Set<string> = (trackIds, tracks) => trackIds.reduce((set, trackId) => {
   set.add(tracks[trackId].category)
   return set
 }, new Set())
 
-export const categoryPointsFromMilestoneMap = (milestoneMap: MilestoneMap) => {
+export const categoryPointsFromMilestoneMap = (milestoneMap: MilestoneMap, trackIds, tracks) => {
   let pointsByCategory = new Map()
   trackIds.forEach((trackId) => {
     const milestone = milestoneMap[trackId]
@@ -61,13 +61,13 @@ export const categoryPointsFromMilestoneMap = (milestoneMap: MilestoneMap) => {
     let currentPoints = pointsByCategory.get(categoryId) || 0
     pointsByCategory.set(categoryId, currentPoints + milestoneToPoints(milestone))
   })
-  return Array.from(categoryIds.values()).map(categoryId => {
+  return Array.from(categoryIds(trackIds, tracks).values()).map(categoryId => {
     const points = pointsByCategory.get(categoryId)
     return { categoryId, points: pointsByCategory.get(categoryId) || 0 }
   })
 }
 
-export const totalPointsFromMilestoneMap = (milestoneMap: MilestoneMap): number =>
+export const totalPointsFromMilestoneMap = (milestoneMap: MilestoneMap, trackIds): number =>
   trackIds.map(trackId => milestoneToPoints(milestoneMap[trackId]))
     .reduce((sum, addend) => (sum + addend), 0)
 
@@ -75,8 +75,8 @@ export const categoryColorScale = d3.scaleOrdinal()
   .domain(categoryIds)
   .range(['#24acfc', '#8147FC', '#b7dc50', '#00D7C8'])
 
-export const eligibleTitles = (milestoneMap: MilestoneMap): string[] => {
-  const totalPoints = totalPointsFromMilestoneMap(milestoneMap)
+export const eligibleTitles = (milestoneMap: MilestoneMap, titles, trackIds): string[] => {
+  const totalPoints = totalPointsFromMilestoneMap(milestoneMap, trackIds)
 
   return titles.filter(title => (title.minPoints === undefined || totalPoints >= title.minPoints)
                              && (title.maxPoints === undefined || totalPoints <= title.maxPoints))
