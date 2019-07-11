@@ -20,7 +20,7 @@ type SnowflakeAppState = {
 
 const hashToState = (hash: String, trackIds): ?SnowflakeAppState => {
   if (!hash) return null
-  const result = defaultState()
+  const result = defaultState(trackIds)
   const hashValues = hash.split('#')[1].split(',')
   if (!hashValues) return null
   trackIds.forEach((trackId, i) => {
@@ -57,29 +57,22 @@ const emptyState = (trackIds): SnowflakeAppState => {
   }
 }
 
-const defaultState = (): SnowflakeAppState => {
+const getRandomIntInclusive = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const defaultState = (trackIds): SnowflakeAppState => {
   return {
     name: 'Soapbox Simon',
     title: 'Senior Engineer',
-    milestoneByTrack: {
-      'MARKET': 1,
-      'WEB_CLIENT': 2,
-      'FOUNDATIONS': 3,
-      'SERVERS': 1,
-      'PROJECT_MANAGEMENT': 3,
-      'COMMUNICATION': 1,
-      'CRAFT': 1,
-      'INITIATIVE': 1,
-      'CAREER_DEVELOPMENT': 3,
-      'ORG_DESIGN': 2,
-      'WELLBEING': 0,
-      'ACCOMPLISHMENT': 2,
-      'MENTORSHIP': 2,
-      'EVANGELISM': 2,
-      'RECRUITING': 3,
-      'COMMUNITY': 0
-    },
-    focusedTrackId: 'MARKET'
+    milestoneByTrack: trackIds.reduce((acc, trackId) => {
+      acc[trackId] = getRandomIntInclusive(0, 5)
+      
+      return acc
+    }, {}),
+    focusedTrackId: trackIds[0]
   }
 }
 
@@ -109,7 +102,7 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
     if (state) {
       this.setState(state)
     } else {
-      this.setState(defaultState())
+      this.setState({ ...this.state, user: defaultState(this.state.trackIds) })
     }
   }
 
