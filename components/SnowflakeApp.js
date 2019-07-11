@@ -181,7 +181,7 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
         </div>
         <TrackSelector
             milestoneByTrack={this.state.user.milestoneByTrack}
-            focusedTrackId={this.state.focusedTrackId}
+            focusedTrackId={this.state.user.focusedTrackId}
             trackIds={this.state.trackIds}
             tracks={this.state.tracks}
             setFocusedTrackIdFn={this.setFocusedTrackId.bind(this)} />
@@ -224,8 +224,8 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
     const trackIds = this.state.trackIds
     let index = trackIds.indexOf(this.state.user.focusedTrackId)
     index = (index + delta + trackIds.length) % trackIds.length
-    const focusedTrackId = th[index]
-    this.setState({ focusedTrackId })
+    const focusedTrackId = this.state.trackIds[index]
+    this.setState({ user: { ...this.state.user, focusedTrackId } })
   }
 
   setFocusedTrackId(trackId: TrackId) {
