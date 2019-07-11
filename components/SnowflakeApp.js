@@ -196,7 +196,7 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
             👩‍🔬 Learn about our Soapbox <a href="https://docs.google.com/document/d/1aGnE9t48aOCwrr_u0U80ArkcVhA9ANuUw0g_ClWzs8c/" target="_blank">growth framework</a>.
           </div>
           <div style={{flex: 1}}>
-            <a href="#" onClick={() => this.setState(emptyState(this.state.trackIds))}>Reset</a>
+            <a href="#" onClick={() => this.setState({ ...this.state, user: emptyState(this.state.trackIds) })}>Reset</a>
           </div>
         </div>
       </main>
