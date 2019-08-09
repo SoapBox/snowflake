@@ -25,13 +25,19 @@ function Home() {
       </div>
       <div style={{display: 'flex'}}>
         <div style={{flex: 1}}>
+        <Link href='/engineering'>
+            <a>Engineering</a>
+          </Link>
+          
+        </div>
+        <div style={{flex: 1}}>
           <Link href='/product'>
             <a>Product</a>
           </Link>
         </div>
         <div style={{flex: 1}}>
-          <Link href='/engineering'>
-            <a>Engineering</a>
+          <Link href='/marketing'>
+            <a>Marketing</a>
           </Link>
         </div>
       </div>

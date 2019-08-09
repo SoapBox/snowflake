@@ -1,14 +1,14 @@
 // @flow
-export type TrackId = 'MARKET' | 'WEB_CLIENT' | 'FOUNDATIONS' | 'SERVERS' |
+export type TrackId = 'MOBILE' | 'WEB_CLIENT' | 'FOUNDATIONS' | 'SERVERS' |
   'PROJECT_MANAGEMENT' | 'COMMUNICATION' | 'CRAFT' | 'INITIATIVE' |
   'CAREER_DEVELOPMENT' | 'ORG_DESIGN' | 'WELLBEING' | 'ACCOMPLISHMENT' |
   'MENTORSHIP' | 'EVANGELISM' | 'RECRUITING' | 'COMMUNITY'
 
 export type MilestoneMap = {
-  'MARKET': Milestone, //market understanding
-  'WEB_CLIENT': Milestone, //Product strategy
-  'FOUNDATIONS': Milestone, //product Analysis
-  'SERVERS': Milestone, //Product Design
+  'MOBILE': Milestone,
+  'WEB_CLIENT': Milestone,
+  'FOUNDATIONS': Milestone,
+  'SERVERS': Milestone,
   'PROJECT_MANAGEMENT': Milestone,
   'COMMUNICATION': Milestone,
   'CRAFT': Milestone,
@@ -22,8 +22,9 @@ export type MilestoneMap = {
   'RECRUITING': Milestone,
   'COMMUNITY': Milestone
 }
+
 type Tracks = {|
-  'MARKET': Track,
+  'MOBILE': Track,
   'WEB_CLIENT': Track,
   'FOUNDATIONS': Track,
   'SERVERS': Track,
@@ -42,8 +43,8 @@ type Tracks = {|
 |}
 
 export const tracks: Tracks = {
-  "MARKET": {
-    "displayName": "Market understanding",
+  "MOBILE": {
+    "displayName": "Market Understanding",
     "category": "A",
     "description": "Assess and value market opportunities, monitor competitors, identify trends",
     "milestones": [{
@@ -51,9 +52,12 @@ export const tracks: Tracks = {
       "signals": [
         "Gather feedback from stakeholders to identify minimum viable product or minimum marketable feature",
         "Communicate requirements to the engineering team",
+        "",
       ],
       "examples": [
         "Wrote product brief for modifying Private Notes based on customer feedback",
+        "",
+        "",
       ],
     }, {
       "summary": "Understand the market demand for a feature or product",
@@ -65,235 +69,244 @@ export const tracks: Tracks = {
       "examples": [
         "Built a product brief / product requirements document for Next Steps pro feature set",
         "Built a competitive matrix comparing SoapBox app feature set vs competitors",
+        "",
       ],
     }, {
       "summary": "Indentifies the total addressable market for specific products",
       "signals": [
         "Works with other departments to approximate total market and provides realistic revenue goals",
         "Uses market opportunities to prioritize one product or feature request over another",
+        "",
       ],
       "examples": [
         "Worked with marketing to determine competitor average pricing for tech sector utilization and identified total market opportunity and influenced internal pricing discussion",
         "Worked with marketing department to craft message specific to target users",
+        "",
       ],
     }, {
       "summary": "Independently identifies, assesses and communicates market opportunities",
       "signals": [
-        "Familiarity with tech domain allows PM to identify adjacent market opportunities",
+        "Familiarity with healthcare domain allows PM to identify adjacent market opportunities",
         "Proposes alternative paths forward to management team",
+        "",
       ],
       "examples": [
         "Demonstrated that minor changes to product would provide a higher conversion rate and increase total market opportunity, presented to management",
+        "",
+        "",
       ],
     }, {
       "summary": "Is considered an expert on company strategy to identify and assess market opportunities",
       "signals": [
         "Has systemized methodology for assessing opportunities and regularly develops strategy to address",
         "Clearly compares competing opportunities and evaluates which present the highest opportunity for growth",
+        "",
       ],
       "examples": [
         "Identified market opportunity, effectively created organizational alignment around it and changed company direction",
+        "",
+        "",
       ],
     }],
   },
 
   "WEB_CLIENT": {
-    "displayName": "Product strategy",
+    "displayName": "Product Strategy",
     "category": "A",
-    "description": "Develops expertise in web client technologies, such as HTML, CSS, and JavaScript",
+    "description": "Understands competitive advantages to create product vision",
     "milestones": [{
-      "summary": "Works effectively within established web client architectures, following current best practices",
+      "summary": "Understands the product's job to be done",
       "signals": [
-        "Makes minor modifications to existing screens",
-        "Fixes simple design quality issues",
-        "Uses CSS appropriately, following style guide",
+        "Discusses job to be done with stakeholders and communicates it during product meetings",
+        "Influences design of product or feature at hand in order to influence design, priority, value",
+        "Understands what the product doesn't do",
       ],
       "examples": [
-        "Implemented sticky item adder on the item detail page",
-        "Hooked up the action to delete an item from an agenda",
-        "Built a new page using ready made scaffolding for EmberJS",
+        "Interviews various potential users to confirm understanding of the job to be done",
+        "Rules out scope creep that doesn't contribute to the goal at hand",
+        "",
       ],
     }, {
-      "summary": "Develops new instances of existing architecture, or minor improvements to existing architecture",
+      "summary": "Identifies new value that a product can deliver",
       "signals": [
-        "Makes sensible abstractions based on template and code patterns",
-        "Specs and builds interactive components independently",
-        "Prototypes simple new features quickly",
+        "Evaluates value of new product to identify prioritization against competing products that we might tackle",
+        "Interviews potential users to see how the product or feature might be used",
+        "",
       ],
       "examples": [
-        "Built paginated page component",
-        "Created shared buttons template",
-        "Uses and understand how Ember-Data works ",
+        "",
+        "",
+        "",
       ],
     }, {
-      "summary": "Designs major new features and demonstrates a nuanced understanding of browser constraints",
+      "summary": "Shapes product strategy to continually provide competitive advantage",
       "signals": [
-        "Provides useful design feedback and suggests feasible alternatives",
-        "Performs systemic tasks to significantly minimise bundle size",
-        "Acts a caretaker for all of web client code",
+        "Gathers feedback from users that identifies how a product can be differentiated from competitors",
+        "Influences decisions based on gathered metrics",
+        "",
       ],
       "examples": [
-        "Designed font loading strategy for SoapBox",
-        "Researched utility of service workers for SoapBox",
-        "Designed and implemented A major feature in the app",
+        "Presents report on user confusion based on metrics, provides suggestions to alleviate",
+        "Researches competition and comes up with novel ways to address gaps in user experience",
+        "",
       ],
     }, {
-      "summary": "Builds complex, reusable architectures that pioneer best practices and enable engineers to work more effectively",
+      "summary": "Guides long-term strategy for some products or services",
       "signals": [
-        "Pioneers architecture migrations that reduce programmer burden",
-        "Implements complex UI transitions that bring delight",
-        "Makes architectural decisions that eliminate entire classes of bugs",
+        "Is considered the expert on specific products and services and consulted for changes",
+        "Works cross-departmentally to promote visibility of changes to products and services",
+        "",
       ],
       "examples": [
-        "Designed and implemented a significant SoapBox component library asset",
-        "Implemented SoapBox's complex microsoft teams embedded frame view",
-        "Designed and pioneered local storage model for front-end authentication",
+        "Worked with the sales and marketing team to develop material for new product release.",
+        "",
+        "",
       ],
     }, {
-      "summary": "Is an industry-leading expert in web client or sets strategic web client direction for an eng team",
+      "summary": "Guides long-term strategy for all products and services offered by SoapBox",
       "signals": [
-        "Invents new techniques to innovate and overcome browser constraints",
-        "Identifies and solved systemic problems with current architecture",
-        "Defines a long-term vision for web client and ensures projects are in service of it",
+        "Is familiar with the health care strategic planning market and how our product fits in the overall landscape",
+        "Influences organizational direction by presenting compelling cases for product development focus",
+        "",
       ],
       "examples": [
-        "Invented CSS in JS",
-        "Defined and drove migration strategy to EmberJS from JQuery",
-        "Implemented unidirectional data flow to completion",
+        "Recommended product focus based on reading industry white papers",
+        "",
+        "",
       ],
     }],
   },
 
   "FOUNDATIONS": {
-    "displayName": "Product analysis",
+    "displayName": "Product Analysis",
     "category": "A",
-    "description": "Develops expertise in foundational systems, such as deployments, pipelines, databases and machine learning",
+    "description": "Understands conversion metrics and can use data to make product decisions",
     "milestones": [{
-      "summary": "Works effectively within established structures, following current best practices",
+      "summary": "self",
       "signals": [
-        "Writes thorough postmortems for service outages",
-        "Makes simple configuration changes to services",
-        "Performs backfills safely and effectively, without causing pages",
+        "behaviour",
+        "behaviour",
+        "behaviour",
       ],
       "examples": [
-        "Made safe and effective AWS changes",
-        "Implemented new ETL pipelines based on existing ones",
-        "Resolved out of disk errors independently",
+        "task",
+        "task",
+        "task",
       ],
     }, {
-      "summary": "Develops new instances of existing architecture, or minor improvements to existing architecture",
+      "summary": "team",
       "signals": [
-        "Made minor version upgrades to technologies",
-        "Builds machine learning jobs within the ML framework",
-        "Triages service issues correctly and independently",
+        "behaviour",
+        "behaviour",
+        "behaviour",
       ],
       "examples": [
-        "Upgraded NodeJS from 8.0 to 8.1.1",
-        "Built custom packages for RPMs",
-        "Improved ETL efficiency by improving Dynamo to S3 loading",
+        "task",
+        "task",
+        "task",
       ],
     }, {
-      "summary": "Designs standalone systems of moderate complexity, or major new features in existing systems",
+      "summary": "teams / department",
       "signals": [
-        "Acts as primary maintainer for existing critical systems",
-        "Designs moderately complex systems",
-        "Makes major version upgrades to libraries",
+        "behaviour",
+        "behaviour",
+        "behaviour",
       ],
       "examples": [
-        "Designed AWS configuration management",
-        "Built SoapBox's realtime stats pipeline and monitoring dashboard",
-        "Designed flexible framework for writing machine learning jobs",
+        "task",
+        "task",
+        "task",
       ],
     }, {
-      "summary": "Builds complex, reusable architectures that pioneer best practices for other engineers, or multi-system services",
+      "summary": "departments / company",
       "signals": [
-        "Designs complex projects that encompass multiple systems and technologies",
-        "Demonstrates deep knowledge of foundational systems",
-        "Introduces new databases and technologies to meet underserved needs",
+        "behaviour",
+        "behaviour",
+        "behaviour",
       ],
       "examples": [
-        "Designed and built caching service for improved data performance management",
-        "Designed AWS configuration management",
-        "Introduced Kinesis and pioneered streaming events pipeline",
+        "task",
+        "task",
+        "task",
       ],
     }, {
-      "summary": "Is an industry-leading expert in foundational engineering or sets strategic foundational direction for an eng team",
+      "summary": "industry",
       "signals": [
-        "Designs transformational projects in service of long-term goals",
-        "Defines the strategic vision for foundational work and supporting technologies",
-        "Invents industry-leading techniques to solve complex problems",
+        "behaviour",
+        "behaviour",
+        "behaviour",
       ],
       "examples": [
-        "Invented a novel ML technique that advanced the state of the art",
-        "Defined and developed SoapBox's continuous delivery strategy",
-        "Developed and implemented High Availability strategy",
+        "task",
+        "task",
+        "task",
       ],
     }],
   },
 
   "SERVERS": {
-    "displayName": "Product design",
+    "displayName": "Product Design",
     "category": "A",
-    "description": "Develops expertise in server side engineering, using technologies such as PHP, NodeJS, or Python and creating performant REST APIs.",
+    "description": "",
     "milestones": [{
-      "summary": "Works effectively within established server side frameworks, following current best practices",
+      "summary": "self",
       "signals": [
-        "Adds NodeJS endpoints using layers architecture",
-        "Adds Service endpoints using Laravel PHP Framework",
-        "Makes minor server changes to support client needs",
+        "behaviour",
+        "behaviour",
+        "behaviour",
       ],
       "examples": [
-        "Added IFTTT trigger for adding items to SoapBox",
-        "Added a RESTful DELETE API endpoint for item management",
-        "Created a minor PHP Artisan command for a Laravel function",
+        "task",
+        "task",
+        "task",
       ],
     }, {
-      "summary": "Develops new instances of existing architecture, or minor improvements to existing architecture",
+      "summary": "team",
       "signals": [
-        "Assesses correctness and utility of existing code and avoids blind copy-pasting",
-        "Generalizes code when appropriate",
-        "Determines data needs from product requirements",
+        "behaviour",
+        "behaviour",
+        "behaviour",
       ],
       "examples": [
-        "Identified need for new index on Algolia",
-        "Acted as caretaker for API routes management",
-        "Updated version and codebase dependencies without errors",
+        "task",
+        "task",
+        "task",
       ],
     }, {
-      "summary": "Designs standalone systems of moderate complexity, or major new features in existing systems",
+      "summary": "teams / department",
       "signals": [
-        "Acts as primary maintainer for existing critical systems",
-        "Integrates third party services effectively",
-        "Writes playbooks for new service maintenance",
+        "behaviour",
+        "behaviour",
+        "behaviour",
       ],
       "examples": [
-        "Implemented Google Auth login to SoapBox",
-        "Implemented payments integration with Stripe",
-        "Built Email Delivery services and deployed servers ",
+        "task",
+        "task",
+        "task",
       ],
     }, {
-      "summary": "Builds complex, reusable architectures that pioneer best practices for other engineers, or multi-system services",
+      "summary": "departments / company",
       "signals": [
-        "Delivers complex systems that achieve their goals",
-        "Avoids subtle architectural mistakes when considering new systems",
-        "Makes appropriate buy vs build choices",
+        "behaviour",
+        "behaviour",
+        "behaviour",
       ],
       "examples": [
-        "Designed SoapBox's cursor management for paged data feeds",
-        "Designed custom domains architecture",
-        "Created Idempotency framework for proper API management",
+        "task",
+        "task",
+        "task",
       ],
     }, {
-      "summary": "Is an industry-leading expert in server side engineering or sets strategic server side direction for an eng team",
+      "summary": "industry",
       "signals": [
-        "Designs transformational projects of significant complexity and scope",
-        "Makes decisions that have positive, long term, wide ranging consequences",
-        "Identifies and solves systemic problems with current architecture",
+        "behaviour",
+        "behaviour",
+        "behaviour",
       ],
       "examples": [
-        "Researched, vetted, and selected Laravel as SoapBox's primary backend language",
-        "Defined microservices architecture and migration plan for V4 -> V5 customers",
-        "Defined and implemented proprietary IP core to the company's success",
+        "task",
+        "task",
+        "task",
       ],
     }],
   },
@@ -444,7 +457,7 @@ export const tracks: Tracks = {
         "Writes clear comments and documentation",
       ],
       "examples": [
-        "Caught a bug by QAing onw work before it went live",
+        "Caught a bug by QAing on work before it went live",
         "Landed non-trivial PR with no caretaker comments",
         "Wrote hermetic tests for the happy and sad cases",
       ],
@@ -927,7 +940,7 @@ export const tracks: Tracks = {
       "examples": [
         "Volunteered as a helper for external code writing workshop",
         "Organized a short tour of the office by college students",
-        "Talked at a Laravel Toronto event hosted at SoapBox",
+        "Hosted a Laravel Toronto event",
       ],
     }, {
       "summary": "Works hard to positively influence large groups of people on their views of Soapbox",
@@ -1038,7 +1051,7 @@ export const tracks: Tracks = {
   "COMMUNITY": {
     "displayName": "Community",
     "category": "D",
-    "description": "Builds community internally, gives of themself to the team, and champions and extols company values",
+    "description": "Builds community internally, gives of themself to the team, champions and extols company values, and unites the team around the customers",
     "milestones": [{
       "summary": "Is available and present on current teams, and works to contribute positively to company culture",
       "signals": [
@@ -1061,12 +1074,12 @@ export const tracks: Tracks = {
       "examples": [
         "Created onboarding bingo",
         "Brought shy and introverted people into a dominant conversation",
-        "Volunteered as secretary for a team",
+        "Volunteered as secretary for a team meeting",
       ],
     }, {
       "summary": "Contributes to improving team relatedness, and helps build a culture of lending support",
       "signals": [
-        "Takes on additional support shifts at short notice",
+        "Assists customers in their usage of the product and champions customer insights internally",
         "Pitches in to help other teams hit deadlines, without missing own deadlines",
         "Uses position to raise difficult issues on someone's behalf",
       ],
@@ -1078,7 +1091,7 @@ export const tracks: Tracks = {
     }, {
       "summary": "Exemplifies selflessness for the team without compromising responsibilities, and lifts everyone up",
       "signals": [
-        "Goes above and beyond on the Watch, serving the team without complaint",
+        "Goes above and beyond in serving the customer without complaint",
         "Implements concrete programs to signficantly improve team inclusivity",
         "Takes on large amounts of tedious grunt work for the team without being asked",
       ],
@@ -1104,14 +1117,9 @@ export const tracks: Tracks = {
 }
 
 export const titles = [
-  {label: 'Jr Product Manager', minPoints: 0, maxPoints: 16},
-  {label: 'Engineer II', minPoints: 17, maxPoints: 35},
-  {label: 'Sr. Engineer', minPoints: 36, maxPoints: 57},
-  {label: 'Team Lead', minPoints: 36, maxPoints: 57},
-  {label: 'Engineering Manager', minPoints: 36, maxPoints: 57},
-  {label: 'Staff Engineer', minPoints: 58, maxPoints: 89},
-  {label: 'Sr. Team Lead', minPoints: 58, maxPoints: 89},
-  {label: 'Sr. Engineering Manager', minPoints: 58, maxPoints: 89},
-  {label: 'Principal Engineer', minPoints: 90},
-  {label: 'Dir. Engineering', minPoints: 90}
+  {label: 'Product Manager Associate', minPoints: 0, maxPoints: 16},
+  {label: 'Product Manager', minPoints: 17, maxPoints: 35},
+  {label: 'Sr. Product Manager', minPoints: 36, maxPoints: 57},
+  {label: 'Product Owner', minPoints: 58, maxPoints: 89},
+  {label: 'Dir. Product', minPoints: 90}
 ]
