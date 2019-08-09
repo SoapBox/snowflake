@@ -2,7 +2,7 @@
 
 import React from 'react'
 import * as d3 from 'd3'
-import { trackIds, milestones, tracks, categoryColorScale } from '../constants'
+import { milestones, categoryColorScale } from '../constants'
 import type { TrackId, Milestone, MilestoneMap } from '../constants'
 
 const width = 400
@@ -33,8 +33,8 @@ class NightingaleChart extends React.Component<Props> {
     this.arcFn = d3.arc()
       .innerRadius(milestone => this.radiusScale(milestone))
       .outerRadius(milestone => this.radiusScale(milestone) + this.radiusScale.bandwidth())
-      .startAngle(- Math.PI / trackIds.length)
-      .endAngle(Math.PI / trackIds.length)
+      .startAngle(- Math.PI / this.props.trackIds.length)
+      .endAngle(Math.PI / this.props.trackIds.length)
       .padAngle(Math.PI / 200)
       .padRadius(.45 * width)
       .cornerRadius(2)
@@ -64,10 +64,10 @@ class NightingaleChart extends React.Component<Props> {
         `}</style>
         <svg>
           <g transform={`translate(${width/2},${width/2}) rotate(-33.75)`}>
-            {trackIds.map((trackId, i) => {
+            {this.props.trackIds.map((trackId, i) => {
               const isCurrentTrack = trackId == this.props.focusedTrackId
               return (
-                <g key={trackId} transform={`rotate(${i * 360 / trackIds.length})`}>
+                <g key={trackId} transform={`rotate(${i * 360 / this.props.trackIds.length})`}>
                   {arcMilestones.map((milestone) => {
                     const isCurrentMilestone = isCurrentTrack && milestone == currentMilestoneId
                     const isMet = this.props.milestoneByTrack[trackId] >= milestone || milestone == 0
@@ -77,14 +77,14 @@ class NightingaleChart extends React.Component<Props> {
                           className={'track-milestone ' + (isMet ? 'is-met ' : ' ') + (isCurrentMilestone ? 'track-milestone-current' : '')}
                           onClick={() => this.props.handleTrackMilestoneChangeFn(trackId, milestone)}
                           d={this.arcFn(milestone)}
-                          style={{fill: isMet ? categoryColorScale(tracks[trackId].category) : undefined}} />
+                          style={{fill: isMet ? categoryColorScale(this.props.tracks[trackId].category) : undefined}} />
                     )
                   })}
                   <circle
                       r="8"
                       cx="0"
                       cy="-50"
-                      style={{fill: categoryColorScale(tracks[trackId].category)}}
+                      style={{fill: categoryColorScale(this.props.tracks[trackId].category)}}
                       className={"track-milestone " + (isCurrentTrack && !currentMilestoneId ? "track-milestone-current" : "")}
                       onClick={() => this.props.handleTrackMilestoneChangeFn(trackId, 0)} />
                 </g>
