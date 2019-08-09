@@ -37,7 +37,7 @@ export const maxLevel = 135
 
 export type Track = {
   displayName: string,
-  category: string, // TK categoryId type?
+  category: string, // TK categoryId type? 
   description: string,
   milestones: {
     summary: string,
