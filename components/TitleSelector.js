@@ -7,12 +7,13 @@ import type { MilestoneMap } from '../constants'
 type Props = {
   milestoneByTrack: MilestoneMap,
   currentTitle: String,
-  setTitleFn: (string) => void
+  setTitleFn: (string) => void,
+  trackIds: Array
 }
 
 class TitleSelector extends React.Component {
   render() {
-    const titles = eligibleTitles(this.props.milestoneByTrack)
+    const titles = eligibleTitles(this.props.milestoneByTrack, this.props.titles, this.props.trackIds)
     return <select value={this.props.currentTitle} onChange={e => this.props.setTitleFn(e.target.value)}>
       <style jsx>{`
         select {
