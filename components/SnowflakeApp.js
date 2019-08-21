@@ -50,7 +50,6 @@ const emptyState = (trackIds): SnowflakeAppState => {
     title: '',
     milestoneByTrack: trackIds.reduce((acc, trackId) => {
       acc[trackId] = 0
-
       return acc
     }, {}),
     focusedTrackId: trackIds[0]
@@ -68,7 +67,7 @@ const defaultState = (trackIds): SnowflakeAppState => {
     name: 'Soapbox Simon',
     title: 'Senior Engineer',
     milestoneByTrack: trackIds.reduce((acc, trackId) => {
-      acc[trackId] = getRandomIntInclusive(0, 5)
+      acc[trackId] = getRandomIntInclusive(0, 3)
       
       return acc
     }, {}),
